@@ -8,7 +8,7 @@
 html{-webkit-text-size-adjust:100%}
 body{
   background:var(--paper); color:var(--ink);
-  font-family:'Noto Sans KR',sans-serif; font-size:17.5px; line-height:1.8;
+  font-family:'Noto Sans KR',sans-serif; font-size:18.5px; font-weight:500; line-height:1.8;
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
   background-size:26px 26px;
 }
@@ -24,7 +24,7 @@ a{color:inherit;text-decoration:none}
 .crumb{color:var(--faint);font-family:'Jua',sans-serif;font-size:1rem}
 
 /* 제목 */
-h1{font-family:'Jua',sans-serif;font-size:clamp(2rem,5.5vw,3rem);line-height:1.38}
+h1{font-family:'Jua',sans-serif;font-size:clamp(2.15rem,5.8vw,3.2rem);line-height:1.38}
 h1 .em{background:linear-gradient(transparent 58%,var(--marker) 58%);padding:0 4px}
 .eyebrow{font-family:'Jua',sans-serif;color:var(--faint);font-size:1.05rem;margin-bottom:8px}
 .center{text-align:center}
@@ -40,20 +40,20 @@ h1 .em{background:linear-gradient(transparent 58%,var(--marker) 58%);padding:0 4
   padding:34px 24px 30px;margin:26px 0 20px;text-align:center;box-shadow:2px 3px 12px rgba(60,50,20,.10)}
 .ring{width:126px;height:126px;margin:0 auto 16px;position:relative}
 .ring .val{position:absolute;inset:0;display:grid;place-items:center}
-.ring .big{font-family:'Jua',sans-serif;font-size:2.3rem;color:var(--blue);line-height:1}
+.ring .big{font-family:'Jua',sans-serif;font-size:2.45rem;color:var(--blue);line-height:1}
 .ring .sub{font-family:'Jua',sans-serif;font-size:.92rem;color:var(--faint)}
-.hero h2{font-family:'Jua',sans-serif;font-size:1.6rem;margin-bottom:2px}
-.hero p{color:var(--ink2);font-size:1rem;margin-bottom:20px}
+.hero h2{font-family:'Jua',sans-serif;font-size:1.72rem;margin-bottom:2px}
+.hero p{color:var(--ink2);font-size:1.06rem;font-weight:500;margin-bottom:20px}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 34px;
   background:var(--marker);border:2px solid var(--ink);border-radius:999px;color:var(--ink);
-  font-family:'Jua',sans-serif;font-size:1.3rem;cursor:pointer}
+  font-family:'Jua',sans-serif;font-size:1.38rem;cursor:pointer}
 .btn:hover,.btn:focus-visible{background:#FFD93D;outline:none}
 .btn.ghost{background:var(--card);border-color:var(--edge);color:var(--ink2)}
 
 /* 목록 */
-h2.sec{font-family:'Jua',sans-serif;font-size:1.7rem;margin:44px 0 2px}
+h2.sec{font-family:'Jua',sans-serif;font-size:1.82rem;margin:44px 0 2px}
 h2.sec .num{color:var(--red)}
-.lead{color:var(--ink2);margin-bottom:18px;font-size:1.02rem}
+.lead{color:var(--ink2);margin-bottom:18px;font-size:1.08rem;font-weight:500}
 
 .list{display:grid;gap:11px}
 .item{display:flex;align-items:center;gap:15px;background:var(--card);border:1px solid var(--edge);
@@ -68,8 +68,8 @@ h2.sec .num{color:var(--red)}
 .item.done .stamp span{display:none}
 .item.done .stamp::after{content:"해결!"}
 .it-body{flex:1;min-width:0}
-.it-label{font-family:'Jua',sans-serif;font-size:.95rem;color:var(--faint)}
-.it-title{font-size:1.16rem;font-weight:500;margin-top:0}
+.it-label{font-family:'Jua',sans-serif;font-size:1rem;color:var(--faint)}
+.it-title{font-size:1.24rem;font-weight:700;margin-top:0}
 .it-go{color:#B8B09A;font-size:1.4rem;flex:0 0 auto}
 .item.review{background:linear-gradient(105deg,rgba(255,224,102,.30),var(--card))}
 .item.review .stamp{border-style:solid;border-color:var(--ink);color:var(--ink)}
@@ -83,9 +83,9 @@ h2.sec .num{color:var(--red)}
   cursor:pointer;color:var(--ink);font-family:inherit;font-size:1rem;min-height:var(--tap);
   box-shadow:1px 2px 6px rgba(60,50,20,.07);transition:transform .12s,box-shadow .12s}
 .card:hover,.card:focus-visible{transform:translate(-1px,-1px);box-shadow:3px 4px 9px rgba(60,50,20,.13);outline:none}
-.card .tag{font-family:'Jua',sans-serif;color:var(--red);font-size:1rem;margin-bottom:6px}
-.card .q{font-weight:500;font-size:1.08rem;min-height:2.6em;line-height:1.65}
-.card .a{display:none;margin-top:13px;padding-top:13px;border-top:1px dashed var(--edge);color:var(--blue);font-size:1.04rem;line-height:1.7}
+.card .tag{font-family:'Jua',sans-serif;color:var(--red);font-size:1.06rem;margin-bottom:6px}
+.card .q{font-weight:700;font-size:1.14rem;min-height:2.4em;line-height:1.7}
+.card .a{display:none;margin-top:13px;padding-top:13px;border-top:1px dashed var(--edge);color:var(--blue);font-size:1.1rem;font-weight:500;line-height:1.7}
 .card .hint{margin-top:13px;font-family:'Jua',sans-serif;font-size:.95rem;color:#A79E86}
 .card.open .a{display:block}
 .card.open .hint{display:none}
@@ -95,25 +95,25 @@ h2.sec .num{color:var(--red)}
 .quiz{background:var(--card);border:1px solid var(--edge);border-radius:4px;padding:24px 22px;margin-bottom:13px;
   box-shadow:1px 2px 7px rgba(60,50,20,.08)}
 .quiz.starred{border-color:var(--red);border-width:1.5px}
-.qnum{font-family:'Jua',sans-serif;font-size:1rem;color:var(--faint);margin-bottom:6px}
+.qnum{font-family:'Jua',sans-serif;font-size:1.06rem;color:var(--faint);margin-bottom:6px}
 .qnum .star{color:var(--red)}
-.qtext{font-family:'Jua',sans-serif;font-size:1.45rem;line-height:1.55;margin-bottom:15px}
+.qtext{font-family:'Jua',sans-serif;font-size:1.56rem;line-height:1.55;margin-bottom:15px}
 .opts{display:grid;gap:9px}
 .opt{background:var(--card);border:1.5px solid var(--edge);border-radius:4px;padding:15px 18px;text-align:left;
-  color:var(--ink);font-family:inherit;font-size:1.1rem;font-weight:500;cursor:pointer;min-height:var(--tap);transition:background .14s}
+  color:var(--ink);font-family:inherit;font-size:1.16rem;font-weight:700;cursor:pointer;min-height:var(--tap);transition:background .14s}
 .opt:hover:not(:disabled),.opt:focus-visible{background:rgba(255,224,102,.28);border-color:var(--ink);outline:none}
 .opt.ok{border-color:var(--green);color:var(--green);font-weight:700;background:rgba(47,125,93,.09)}
 .opt.no{border-color:var(--red);color:var(--red);background:rgba(192,57,43,.06)}
 .opt:disabled{opacity:.45;cursor:default}
-.fb{font-family:'Jua',sans-serif;font-size:1.1rem;margin-top:10px;min-height:1.5em}
+.fb{font-family:'Jua',sans-serif;font-size:1.18rem;margin-top:10px;min-height:1.5em}
 .fb.ok{color:var(--green)}.fb.no{color:var(--red)}
 
 /* 완료 배너 */
 .done-banner{display:none;position:relative;background:var(--card);border:1px solid var(--edge);border-radius:4px;
   padding:32px 24px 26px;text-align:center;margin-top:26px;box-shadow:2px 3px 12px rgba(60,50,20,.11)}
 .done-banner.show{display:block}
-.done-banner .t{font-family:'Jua',sans-serif;font-size:1.8rem;margin-bottom:4px}
-.done-banner .s{color:var(--ink2);font-size:1.02rem;margin-bottom:20px}
+.done-banner .t{font-family:'Jua',sans-serif;font-size:1.92rem;margin-bottom:4px}
+.done-banner .s{color:var(--ink2);font-size:1.08rem;font-weight:500;margin-bottom:20px}
 .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .bigstamp{display:inline-grid;place-items:center;width:78px;height:78px;border:3px solid var(--red);
   border-radius:50%;color:var(--red);font-family:'Gaegu',cursive;font-weight:700;font-size:1.85rem;
@@ -121,7 +121,7 @@ h2.sec .num{color:var(--red)}
 
 /* 마무리 */
 .closing{margin-top:56px;border-top:1px dashed var(--edge);padding-top:26px;text-align:center}
-.closing p{font-family:'Jua',sans-serif;font-size:1.55rem;line-height:1.6}
+.closing p{font-family:'Jua',sans-serif;font-size:1.66rem;line-height:1.6}
 .closing .em{background:linear-gradient(transparent 58%,var(--marker) 58%);padding:0 3px}
 .foot{margin-top:48px;text-align:center;color:var(--faint);font-family:'Jua',sans-serif;
   font-size:.98rem;line-height:2}
@@ -129,9 +129,20 @@ h2.sec .num{color:var(--red)}
 /* 교사용 */
 .tcard{background:var(--card);border:1px solid var(--edge);border-radius:4px;padding:22px;margin-bottom:12px;
   box-shadow:1px 2px 6px rgba(60,50,20,.07)}
-.tcard h3{font-family:'Jua',sans-serif;font-size:1.35rem;margin-bottom:6px;color:var(--red)}
-.tcard p{color:var(--ink2);font-size:1.02rem}
-.tcard ol{margin:10px 0 0 20px;color:var(--ink2);font-size:.96rem}
+.tcard h3{font-family:'Jua',sans-serif;font-size:1.44rem;margin-bottom:6px;color:var(--red)}
+.tcard p{color:var(--ink2);font-size:1.08rem;font-weight:500}
+.tcard ol{margin:10px 0 0 20px;color:var(--ink2);font-size:1.04rem;font-weight:500}
 .tcard li{margin-bottom:6px}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ── 유물 사진 (카드 펼침 시) */
+.figs{display:grid;gap:12px;margin-top:14px}
+.figs:has(figure:nth-child(2)){grid-template-columns:1fr 1fr}
+@media(max-width:520px){.figs:has(figure:nth-child(2)){grid-template-columns:1fr}}
+.figs figure{margin:0}
+.figs img{display:block;width:100%;height:auto;border-radius:3px;background:#2E2C27;
+  border:1px solid #2E2C27;box-shadow:0 2px 8px rgba(60,50,20,.22)}
+.figs figcaption{margin-top:7px;font-family:'Jua',sans-serif;font-size:.88rem;color:var(--faint);
+  line-height:1.45;text-align:center}
+.card.haspic .hint{color:var(--red)}
