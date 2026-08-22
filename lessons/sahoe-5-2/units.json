@@ -1,0 +1,153 @@
+{
+  "schema": "units/1",
+  "site": {
+    "title": "역사 탐정 **수첩**",
+    "subtitle": "사회 5학년 2학기",
+    "nav_foot": "어느 차시든 눌러서 펼칠 수 있어요.\n예습도 복습도 자유롭게.",
+    "teacher_page": true,
+    "progress_key": "sahoe52-v1"
+  },
+  "units": [
+    {
+      "id": "u1",
+      "order": 1,
+      "label": "1",
+      "title": "유적과 유물로 살펴본 옛 사람들의 생활",
+      "lessons": [
+        {
+          "code": "01",
+          "kind": "lesson",
+          "slug": "1",
+          "title": "단원 열기",
+          "label": "1차시"
+        },
+        {
+          "code": "02-03",
+          "kind": "lesson",
+          "slug": "2-3",
+          "title": "선사 시대",
+          "label": "2~3차시"
+        },
+        {
+          "code": "04",
+          "kind": "lesson",
+          "slug": "4",
+          "title": "청동기 시대",
+          "label": "4차시"
+        },
+        {
+          "code": "05",
+          "kind": "lesson",
+          "slug": "5",
+          "title": "고조선",
+          "label": "5차시"
+        },
+        {
+          "code": "01",
+          "kind": "review",
+          "slug": "review1",
+          "title": "1~5차시 복습",
+          "label": "다시 풀기"
+        },
+        {
+          "code": "06",
+          "kind": "lesson",
+          "slug": "6",
+          "title": "철기와 여러 나라",
+          "label": "6차시"
+        },
+        {
+          "code": "07-08",
+          "kind": "lesson",
+          "slug": "7-8",
+          "title": "고대 국가의 발전",
+          "label": "7~8차시"
+        },
+        {
+          "code": "09",
+          "kind": "lesson",
+          "slug": "9",
+          "title": "고대 국가의 교류",
+          "label": "9차시"
+        },
+        {
+          "code": "10",
+          "kind": "lesson",
+          "slug": "10",
+          "title": "고대의 신분과 생활",
+          "label": "10차시"
+        },
+        {
+          "code": "02",
+          "kind": "review",
+          "slug": "review2",
+          "title": "6~10차시 복습",
+          "label": "다시 풀기"
+        },
+        {
+          "code": "11-12",
+          "kind": "lesson",
+          "slug": "11-12",
+          "title": "고대의 문화",
+          "label": "11~12차시"
+        },
+        {
+          "code": "13-14",
+          "kind": "lesson",
+          "slug": "13-14",
+          "title": "고려의 성립",
+          "label": "13~14차시"
+        },
+        {
+          "code": "15",
+          "kind": "lesson",
+          "slug": "15",
+          "title": "고려의 대외 교류",
+          "label": "15차시"
+        },
+        {
+          "code": "03",
+          "kind": "review",
+          "slug": "review3",
+          "title": "11~15차시 복습",
+          "label": "다시 풀기"
+        },
+        {
+          "code": "16",
+          "kind": "lesson",
+          "slug": "16",
+          "title": "고려 사람들의 생활",
+          "label": "16차시"
+        },
+        {
+          "code": "17",
+          "kind": "lesson",
+          "slug": "17",
+          "title": "고려와 불교",
+          "label": "17차시"
+        },
+        {
+          "code": "18-19",
+          "kind": "lesson",
+          "slug": "18-19",
+          "title": "고려의 문화",
+          "label": "18~19차시"
+        },
+        {
+          "code": "04",
+          "kind": "review",
+          "slug": "review4",
+          "title": "16~19차시 복습",
+          "label": "다시 풀기"
+        },
+        {
+          "code": "20",
+          "kind": "lesson",
+          "slug": "20",
+          "title": "단원 마무리",
+          "label": "20차시"
+        }
+      ]
+    }
+  ]
+}
