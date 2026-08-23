@@ -91,8 +91,15 @@ def build_pairs():
     """원본 경로 -> 새 경로"""
     for p in sorted((OLD / "lesson").glob("*.html")):
         PAIRS.append((p, NEW / "u1" / ("%s.html" % pad(p.stem))))
+    # 복습 파일 이름은 units.json 이 정본이다 (review1 -> r01-05).
+    import json
+    units = json.loads((ROOT / "lessons" / "sahoe-5-2" / "units.json")
+                       .read_text(encoding="utf-8"))
+    by_slug = {l["slug"]: l["code"] for u in units["units"]
+               for l in u["lessons"] if l.get("kind") == "review"}
     for p in sorted((OLD / "review").glob("*.html")):
-        PAIRS.append((p, NEW / "u1" / ("r%s.html" % pad(p.stem))))
+        code = by_slug["review%s" % p.stem]
+        PAIRS.append((p, NEW / "u1" / ("r%s.html" % code)))
 
 
 def pad(code):

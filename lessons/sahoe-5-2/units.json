@@ -43,7 +43,7 @@
           "label": "5차시"
         },
         {
-          "code": "01",
+          "code": "01-05",
           "kind": "review",
           "slug": "review1",
           "title": "1~5차시 복습",
@@ -78,7 +78,7 @@
           "label": "10차시"
         },
         {
-          "code": "02",
+          "code": "06-10",
           "kind": "review",
           "slug": "review2",
           "title": "6~10차시 복습",
@@ -106,7 +106,7 @@
           "label": "15차시"
         },
         {
-          "code": "03",
+          "code": "11-15",
           "kind": "review",
           "slug": "review3",
           "title": "11~15차시 복습",
@@ -134,7 +134,7 @@
           "label": "18~19차시"
         },
         {
-          "code": "04",
+          "code": "16-19",
           "kind": "review",
           "slug": "review4",
           "title": "16~19차시 복습",

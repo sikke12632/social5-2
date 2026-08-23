@@ -56,6 +56,15 @@ def code_normalize(code):
     return "-".join("%02d" % int(p) for p in str(code).split("-"))
 
 
+def lesson_sort_key(lesson):
+    """차시는 첫 번호로, 복습은 다루는 범위의 마지막 번호로 정렬한다.
+
+    '1~5차시 복습'은 5차시 **뒤에** 와야 하므로 첫 번호(1)로 정렬하면 안 된다.
+    """
+    ns = code_numbers(lesson["code"])
+    return (ns[-1], 1) if lesson.get("kind") == "review" else (ns[0], 0)
+
+
 def file_stem(lesson):
     """복습은 같은 차시 번호를 쓰므로 앞에 r 을 붙여 구분한다."""
     c = code_normalize(lesson["code"])
@@ -167,9 +176,7 @@ def render_nav(site, units, built, cur_unit, cur_stem):
         out.append('      <button><span class="caret">▶</span>%s</button>'
                    % plain(unit_nav_title(unit)))
         out.append('      <div class="lessons">')
-        for les in sorted(unit["lessons"],
-                          key=lambda l: (code_sort_key(l["code"]),
-                                         l.get("kind") == "review")):
+        for les in sorted(unit["lessons"], key=lesson_sort_key):
             stem = file_stem(les)
             label = nav_label(les)
             extra = " review" if les.get("kind") == "review" else ""
@@ -203,7 +210,7 @@ PAGE = """<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{page_title}</title>
-<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Dodum&family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 {style}</style>
 </head>
@@ -374,6 +381,18 @@ def build(site_id="sahoe-5-2"):
                           encoding="utf-8")
         written.append(target)
 
+    # 이름이 바뀐 차시의 옛 HTML이 남아 떠돌지 않게 치운다
+    for unit in units:
+        d = SITE / unit["id"]
+        if not d.is_dir():
+            continue
+        keep = {"%s.html" % st for u, st, _ in found if u["id"] == unit["id"]}
+        for old_page in d.glob("*.html"):
+            if old_page.name not in keep:
+                print("  지움 %s (더 이상 만들어지지 않는 파일)"
+                      % old_page.relative_to(ROOT))
+                old_page.unlink()
+
     about = base / "about.json"
     if about.is_file():
         t = SITE / "teacher.html"
@@ -400,7 +419,7 @@ ABOUT_PAGE = """<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{page_title}</title>
-<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Dodum&family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 {style}
 .about{{max-width:660px;margin:0 auto;padding:44px 22px 90px}}
@@ -741,7 +760,7 @@ SHELL = """<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{page_title}</title>
-<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Dodum&family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 {style}</style>
 </head>
@@ -760,7 +779,7 @@ document.getElementById('pct').textContent=n;
 document.getElementById('prog').style.strokeDashoffset=327-327*(n/tot);
 var nx=SEQ.find(function(x){return !done[x[1]]});
 if(n===0){
-  document.getElementById('heroTitle').textContent='\uc218\uccb2\uc744 \ud3bc\uccd0 \ubcfc\uae4c\uc694?';
+  document.getElementById('heroTitle').textContent='\uc218\ucca9\uc744 \ud3bc\uccd0 \ubcfc\uae4c\uc694?';
   document.getElementById('heroSub').textContent='1\ucc28\uc2dc\ubd80\ud130 \ucc9c\ucc9c\ud788 \ud568\uaed8 \uac00\uc694.';
 } else if(nx){
   document.getElementById('heroTitle').textContent=nx[2];
@@ -769,13 +788,13 @@ if(n===0){
   document.getElementById('heroBtn').href=nx[3];
 } else {
   document.getElementById('heroTitle').textContent='1\ub2e8\uc6d0, \uc804\ubd80 \ud574\uacb0!';
-  document.getElementById('heroSub').textContent='\uc218\uccb2\uc774 \ub3c4\uc7a5\uc73c\ub85c \uac00\ub4dd \ucc3c\uc5b4\uc694.';
+  document.getElementById('heroSub').textContent='\uc218\ucca9\uc774 \ub3c4\uc7a5\uc73c\ub85c \uac00\ub4dd \ucc3c\uc5b4\uc694.';
   document.getElementById('heroBtn').textContent='\ub2e4\uc2dc \ub458\ub7ec\ubcf4\uae30';
   document.getElementById('heroBtn').href=SEQ[0][3];
 }
 document.getElementById('rst').addEventListener('click',function(e){
   e.preventDefault();
-  if(confirm('\uc218\uccb2\uc5d0 \ucc0d\uc740 \ub3c4\uc7a5\uc744 \ubaa8\ub450 \uc9c0\uc6b8\uae4c\uc694?')){P.reset();location.reload();}
+  if(confirm('\uc218\ucca9\uc5d0 \ucc0d\uc740 \ub3c4\uc7a5\uc744 \ubaa8\ub450 \uc9c0\uc6b8\uae4c\uc694?')){P.reset();location.reload();}
 });"""
 
 HOME_BODY = """<header class="center" style="margin-top:20px">
@@ -822,8 +841,7 @@ def seq_of(units, built):
     """진도 계산용 차시 순서. 옛 index.html 의 SEQ 배열을 대신한다."""
     out = []
     for u in sorted(units, key=lambda x: x["order"]):
-        for l in sorted(u["lessons"], key=lambda l: (code_sort_key(l["code"]),
-                                                     l.get("kind") == "review")):
+        for l in sorted(u["lessons"], key=lesson_sort_key):
             stem = file_stem(l)
             if (u["id"], stem) not in built:
                 continue
@@ -870,8 +888,7 @@ def render_home(site, units, built):
 
 def render_unit_list(unit, site, built):
     rows = []
-    for l in sorted(unit["lessons"], key=lambda l: (code_sort_key(l["code"]),
-                                                    l.get("kind") == "review")):
+    for l in sorted(unit["lessons"], key=lesson_sort_key):
         stem = file_stem(l)
         if (unit["id"], stem) not in built:
             continue
