@@ -162,7 +162,7 @@ def nav_label(lesson):
     return "%s · %s" % (code_label(lesson["code"]), lesson["title"])
 
 
-def render_nav(site, units, built, cur_unit, cur_stem):
+def render_nav(site, units, built, cur_unit, cur_stem, prefix="../", open_all=False):
     out = ['<nav class="nav" id="nav">',
            '    <div class="brand">',
            "      <h1>%s</h1>" % inline(site["title"])]
@@ -172,7 +172,7 @@ def render_nav(site, units, built, cur_unit, cur_stem):
 
     for unit in sorted(units, key=lambda u: u["order"]):
         is_cur = unit["id"] == cur_unit
-        out.append('    <div class="unit%s">' % (" open" if is_cur else ""))
+        out.append('    <div class="unit%s">' % (" open" if (is_cur or open_all) else ""))
         out.append('      <button><span class="caret">▶</span>%s</button>'
                    % plain(unit_nav_title(unit)))
         out.append('      <div class="lessons">')
@@ -184,9 +184,9 @@ def render_nav(site, units, built, cur_unit, cur_stem):
                 out.append('        <span class="soon">%s</span>' % plain(label))
             else:
                 on = " on" if (is_cur and stem == cur_stem) else ""
-                out.append('        <a class="lk%s%s" href="../%s/%s.html" '
+                out.append('        <a class="lk%s%s" href="%s%s/%s.html" '
                            'data-slug="%s">%s</a>'
-                           % (extra, on, unit["id"], stem,
+                           % (extra, on, prefix, unit["id"], stem,
                               plain(les.get("slug", stem)), plain(label)))
         out.append("      </div>")
         out.append("    </div>")
@@ -194,8 +194,8 @@ def render_nav(site, units, built, cur_unit, cur_stem):
     if site.get("nav_foot"):
         out.append('    <p class="navfoot">%s</p>' % lines(site["nav_foot"]))
     if site.get("teacher_page"):
-        out.append('    <p class="navfoot"><a class="teach" href="../teacher.html">'
-                   '선생님께 드리는 안내</a></p>')
+        out.append('    <p class="navfoot"><a class="teach" href="%steacher.html">'
+                   '선생님께 드리는 안내</a></p>' % prefix)
     out.append("  </nav>")
     return NL.join(out)
 
@@ -764,8 +764,15 @@ SHELL = """<!DOCTYPE html>
 <style>
 {style}</style>
 </head>
-<body><div class="wrap">
+<body>
+{topbar}
+<div class="shell">
+{nav}
+  <main class="main">
+    <div class="col">
 {body}
+    </div>
+  </main>
 </div>
 <script>
 {script}</script>
@@ -773,6 +780,12 @@ SHELL = """<!DOCTYPE html>
 </body>
 </html>
 """
+
+TOPBAR = """<div class="topbar">
+  <button id="open">&#9776;</button>
+  <span>{site_title}</span>
+</div>
+<div class="scrim" id="scrim"></div>"""
 
 HOME_JS = """var d=P.get(), done=d.done||{}, n=Object.keys(done).length, tot=SEQ.length;
 document.getElementById('pct').textContent=n;
@@ -881,6 +894,8 @@ def render_home(site, units, built):
         page_title=plain(re.sub(r"\*\*", "", site["title"])),
         style=STYLE,
         script=SCRIPT.replace("__KEY__", site.get("progress_key", "sahoe52-v1")),
+        topbar=TOPBAR.format(site_title=inline(site["title"])),
+        nav=render_nav(site, units, built, None, None, prefix="", open_all=True),
         body=body,
         page_script="<script>var SEQ=%s;%s%s</script>"
                     % (json.dumps(seq, ensure_ascii=False), NL, HOME_JS))
@@ -911,6 +926,8 @@ def render_unit_list(unit, site, built):
                                           re.sub(r"\*\*", "", site["title"]))),
         style=STYLE,
         script=SCRIPT.replace("__KEY__", site.get("progress_key", "sahoe52-v1")),
+        topbar="",
+        nav="",
         body=body,
         page_script="<script>document.querySelectorAll('.list .item').forEach("
                     "function(a){if(a.dataset.slug&&P.isDone(a.dataset.slug))"
