@@ -198,6 +198,8 @@ h2.sec .num{color:var(--red)}
 /* 본문에서 첫 제목이 너무 붙지 않게 */
 .col>header.center{margin-bottom:6px}
 .col h2.sec:first-of-type{margin-top:34px}
+/* 홈: 제목은 왼쪽 목차가 달고 있으니 본문은 진행률 카드로 시작한다 */
+.col>.hero:first-child{margin-top:6px}
 
 /* 모바일 */
 .topbar{display:none}
@@ -223,9 +225,44 @@ h2.sec .num{color:var(--red)}
 </style>
 </head>
 <body>
-
+<div class="topbar">
+  <button id="open">&#9776;</button>
+  <span>역사 탐정 <span class="em">수첩</span></span>
+</div>
+<div class="scrim" id="scrim"></div>
 <div class="shell">
-
+<nav class="nav" id="nav">
+    <div class="brand">
+      <h1>역사 탐정 <span class="em">수첩</span></h1>
+      <p>사회 5학년 2학기</p>
+    </div>
+    <div class="unit open">
+      <button><span class="caret">▶</span>1. 유적과 유물로 살펴본 옛 사람들의 생활</button>
+      <div class="lessons">
+        <a class="lk" href="u1/01.html" data-slug="1">1차시 · 단원 열기</a>
+        <a class="lk" href="u1/02-03.html" data-slug="2-3">2~3차시 · 선사 시대</a>
+        <a class="lk" href="u1/04.html" data-slug="4">4차시 · 청동기 시대</a>
+        <a class="lk" href="u1/05.html" data-slug="5">5차시 · 고조선</a>
+        <a class="lk review" href="u1/r01-05.html" data-slug="review1">★ 1~5차시 복습</a>
+        <a class="lk" href="u1/06.html" data-slug="6">6차시 · 철기와 여러 나라</a>
+        <a class="lk" href="u1/07-08.html" data-slug="7-8">7~8차시 · 고대 국가의 발전</a>
+        <a class="lk" href="u1/09.html" data-slug="9">9차시 · 고대 국가의 교류</a>
+        <a class="lk" href="u1/10.html" data-slug="10">10차시 · 고대의 신분과 생활</a>
+        <a class="lk review" href="u1/r06-10.html" data-slug="review2">★ 6~10차시 복습</a>
+        <a class="lk" href="u1/11-12.html" data-slug="11-12">11~12차시 · 고대의 문화</a>
+        <a class="lk" href="u1/13-14.html" data-slug="13-14">13~14차시 · 고려의 성립</a>
+        <a class="lk" href="u1/15.html" data-slug="15">15차시 · 고려의 대외 교류</a>
+        <a class="lk review" href="u1/r11-15.html" data-slug="review3">★ 11~15차시 복습</a>
+        <a class="lk" href="u1/16.html" data-slug="16">16차시 · 고려 사람들의 생활</a>
+        <a class="lk" href="u1/17.html" data-slug="17">17차시 · 고려와 불교</a>
+        <a class="lk" href="u1/18-19.html" data-slug="18-19">18~19차시 · 고려의 문화</a>
+        <a class="lk review" href="u1/r16-19.html" data-slug="review4">★ 16~19차시 복습</a>
+        <a class="lk" href="u1/20.html" data-slug="20">20차시 · 단원 마무리</a>
+      </div>
+    </div>
+    <p class="navfoot">어느 차시든 눌러서 펼칠 수 있어요.<br>예습도 복습도 자유롭게.</p>
+    <p class="navfoot"><a class="teach" href="teacher.html">선생님께 드리는 안내</a></p>
+  </nav>
   <main class="main">
     <div class="col">
 <div class="bar"><a class="back" href="index.html">&larr; 처음으로</a>

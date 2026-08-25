@@ -407,7 +407,7 @@ def build(site_id="sahoe-5-2"):
         for unit in units:
             if any((unit["id"], st) in built for _, st, _ in found):
                 t = SITE / unit_list_name(unit)
-                t.write_text(render_unit_list(unit, site, built), encoding="utf-8")
+                t.write_text(render_unit_list(unit, site, units, built), encoding="utf-8")
                 written.append(t)
 
     return written, len(units), sum(len(u["lessons"]) for u in units)
@@ -662,6 +662,8 @@ h2.sec .num{color:var(--red)}
 /* 본문에서 첫 제목이 너무 붙지 않게 */
 .col>header.center{margin-bottom:6px}
 .col h2.sec:first-of-type{margin-top:34px}
+/* 홈: 제목은 왼쪽 목차가 달고 있으니 본문은 진행률 카드로 시작한다 */
+.col>.hero:first-child{margin-top:6px}
 
 /* 모바일 */
 .topbar{display:none}
@@ -810,11 +812,7 @@ document.getElementById('rst').addEventListener('click',function(e){
   if(confirm('\uc218\ucca9\uc5d0 \ucc0d\uc740 \ub3c4\uc7a5\uc744 \ubaa8\ub450 \uc9c0\uc6b8\uae4c\uc694?')){P.reset();location.reload();}
 });"""
 
-HOME_BODY = """<header class="center" style="margin-top:20px">
-<div class="eyebrow">{sub}</div>
-<h1>{title}</h1></header>
-
-<div class="hero">
+HOME_BODY = """<div class="hero">
   <div class="tape"></div>
   <div class="ring">
     <svg width="126" height="126" viewBox="0 0 126 126">
@@ -885,8 +883,6 @@ def render_home(site, units, built):
     for extra in site.get("upcoming_units", []):
         items.append(_unit_row({"label": extra, "title": ""}, False))
     body = HOME_BODY.format(
-        sub=plain(site.get("subtitle", "")),
-        title=inline(site["title"]),
         first=seq[0][3] if seq else "index.html",
         items="".join(items),
         foot=plain(site.get("foot", "")))
@@ -901,7 +897,7 @@ def render_home(site, units, built):
                     % (json.dumps(seq, ensure_ascii=False), NL, HOME_JS))
 
 
-def render_unit_list(unit, site, built):
+def render_unit_list(unit, site, units, built):
     rows = []
     for l in sorted(unit["lessons"], key=lesson_sort_key):
         stem = file_stem(l)
@@ -926,8 +922,8 @@ def render_unit_list(unit, site, built):
                                           re.sub(r"\*\*", "", site["title"]))),
         style=STYLE,
         script=SCRIPT.replace("__KEY__", site.get("progress_key", "sahoe52-v1")),
-        topbar="",
-        nav="",
+        topbar=TOPBAR.format(site_title=inline(site["title"])),
+        nav=render_nav(site, units, built, unit["id"], None, prefix=""),
         body=body,
         page_script="<script>document.querySelectorAll('.list .item').forEach("
                     "function(a){if(a.dataset.slug&&P.isDone(a.dataset.slug))"
