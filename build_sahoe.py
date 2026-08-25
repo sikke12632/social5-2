@@ -165,9 +165,11 @@ def nav_label(lesson):
 def render_nav(site, units, built, cur_unit, cur_stem, prefix="../", open_all=False):
     out = ['<nav class="nav" id="nav">',
            '    <div class="brand">',
-           "      <h1>%s</h1>" % inline(site["title"])]
+           '      <a class="home" href="%sindex.html">' % prefix,
+           "        <h1>%s</h1>" % inline(site["title"])]
     if site.get("subtitle"):
-        out.append("      <p>%s</p>" % plain(site["subtitle"]))
+        out.append("        <p>%s</p>" % plain(site["subtitle"]))
+    out.append("      </a>")
     out.append("    </div>")
 
     for unit in sorted(units, key=lambda u: u["order"]):
@@ -236,6 +238,7 @@ PAGE = """<!DOCTYPE html>
 
 {banner}
 {closing}
+{pagenav}
       <div class="foot">{foot}</div>
     </div>
   </main>
@@ -262,6 +265,27 @@ def render_banner(d):
             '<div class="row">%s</div></div>'
             % (plain(d.get("stamp", "해결!")), plain(d.get("title", "")),
                plain(d.get("sub", "")), btns))
+
+
+def render_pagenav(unit, stem, units, built):
+    """차시 아래쪽 이전·다음 버튼. 순서는 홈 진행률과 같은 SEQ 를 쓴다."""
+    seq = seq_of(units, built)
+    cur = "%s/%s.html" % (unit["id"], stem)
+    hrefs = [s[3] for s in seq]
+    if cur not in hrefs:
+        return ""
+    i = hrefs.index(cur)
+
+    def btn(side, arrow, item):
+        href, label = (("../%s" % item[3], item[2]) if item
+                       else ("../index.html", "처음으로"))
+        return ('<a class="pn %s" href="%s"><span class="dir">%s</span>'
+                '<span class="t">%s</span></a>'
+                % (side, plain(href), arrow, plain(label)))
+
+    return ('      <nav class="pagenav">%s%s</nav>'
+            % (btn("prev", "&larr; 이전", seq[i - 1] if i > 0 else None),
+               btn("next", "다음 &rarr;", seq[i + 1] if i + 1 < len(seq) else None)))
 
 
 def render_page(lesson, unit, site, units, built):
@@ -292,6 +316,7 @@ def render_page(lesson, unit, site, units, built):
               if lesson.get("lead") else ""),
         sections=(NL * 2).join(render_section(s) for s in lesson["sections"]),
         banner=render_banner(lesson.get("done")),
+        pagenav=render_pagenav(unit, stem, units, built),
         closing=('      <div class="closing"><p>%s</p></div>' % lines(lesson["closing"])
                  if lesson.get("closing") else ""),
         foot=plain(site.get("foot", "사회 5-2 · 역사 탐정 수첩")),
@@ -630,6 +655,10 @@ h2.sec .num{color:var(--red)}
   position:sticky;top:0;height:100vh;overflow-y:auto;padding:24px 0 40px;
 }
 .nav .brand{padding:0 20px 18px;border-bottom:1.5px solid var(--edge);margin-bottom:12px}
+.nav .brand a.home{display:block;color:inherit}
+.nav .brand a.home:hover h1,.nav .brand a.home:focus-visible h1{text-decoration:underline;
+  text-decoration-thickness:1.5px;text-underline-offset:4px}
+.nav .brand a.home:focus-visible{outline:none}
 .nav .brand h1{font-family:'Jua',sans-serif;font-size:1.5rem;line-height:1.3}
 .nav .brand h1 .em{background:linear-gradient(transparent 58%,var(--marker) 58%);padding:0 3px}
 .nav .brand p{font-family:'Jua',sans-serif;font-size:.92rem;color:var(--faint);margin-top:2px}
@@ -664,6 +693,20 @@ h2.sec .num{color:var(--red)}
 .col h2.sec:first-of-type{margin-top:34px}
 /* 홈: 제목은 왼쪽 목차가 달고 있으니 본문은 진행률 카드로 시작한다 */
 .col>.hero:first-child{margin-top:6px}
+
+/* 이전 · 다음 차시 */
+.pagenav{display:flex;gap:11px;margin-top:44px;padding-top:26px;border-top:1px dashed var(--edge)}
+.pagenav .pn{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:2px;
+  background:var(--card);border:1.5px solid var(--edge);border-radius:4px;padding:13px 18px;
+  min-height:var(--tap);box-shadow:1px 2px 6px rgba(60,50,20,.07);transition:transform .12s,box-shadow .12s}
+.pagenav .pn:hover,.pagenav .pn:focus-visible{background:var(--marker);border-color:var(--ink);
+  transform:translate(-1px,-1px);box-shadow:3px 4px 9px rgba(60,50,20,.13);outline:none}
+.pagenav .pn:active{transform:none}
+.pagenav .pn.next{text-align:right}
+.pagenav .dir{font-family:'Jua',sans-serif;font-size:.95rem;color:var(--faint)}
+.pagenav .pn:hover .dir,.pagenav .pn:focus-visible .dir{color:var(--ink2)}
+.pagenav .t{font-weight:700;font-size:1.06rem;line-height:1.45}
+@media(max-width:520px){.pagenav{flex-direction:column}.pagenav .pn.next{text-align:left}}
 
 /* 모바일 */
 .topbar{display:none}
