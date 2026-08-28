@@ -91,6 +91,13 @@ def lines(text):
     return "<br>".join(inline(t) for t in str(text).split(NL))
 
 
+def foot_html(site, default=""):
+    out = plain(site.get("foot", default))
+    if site.get("credit"):
+        out += '<br><span class="credit">%s</span>' % plain(site["credit"])
+    return out
+
+
 # --------------------------------------------------------------------------
 # 조각 렌더러
 # --------------------------------------------------------------------------
@@ -319,7 +326,7 @@ def render_page(lesson, unit, site, units, built):
         pagenav=render_pagenav(unit, stem, units, built),
         closing=('      <div class="closing"><p>%s</p></div>' % lines(lesson["closing"])
                  if lesson.get("closing") else ""),
-        foot=plain(site.get("foot", "사회 5-2 · 역사 탐정 수첩")),
+        foot=foot_html(site, "사회 5-2 · 역사 탐정 수첩"),
         page_script=page_script,
     )
 
@@ -620,6 +627,7 @@ h2.sec .num{color:var(--red)}
 .closing{margin-top:56px;border-top:1px dashed var(--edge);padding-top:26px;text-align:center}
 .closing p{font-family:'Jua',sans-serif;font-size:1.66rem;line-height:1.6}
 .closing .em{background:linear-gradient(transparent 58%,var(--marker) 58%);padding:0 3px}
+.foot .credit{font-family:'Noto Sans KR',sans-serif;font-size:11.5px;opacity:.9}
 .foot{margin-top:48px;text-align:center;color:var(--faint);font-family:'Jua',sans-serif;
   font-size:.98rem;line-height:2}
 
@@ -928,7 +936,7 @@ def render_home(site, units, built):
     body = HOME_BODY.format(
         first=seq[0][3] if seq else "index.html",
         items="".join(items),
-        foot=plain(site.get("foot", "")))
+        foot=foot_html(site))
     return SHELL.format(
         page_title=plain(re.sub(r"\*\*", "", site["title"])),
         style=STYLE,
@@ -959,7 +967,7 @@ def render_unit_list(unit, site, units, built):
     body = UNIT_BODY.format(
         sub=plain(site.get("subtitle", "")), label=plain(unit["label"]),
         title=inline(unit["title"]), rows="".join(rows),
-        foot=plain(site.get("foot", "")))
+        foot=foot_html(site))
     return SHELL.format(
         page_title=plain("%s단원 · %s" % (unit["label"],
                                           re.sub(r"\*\*", "", site["title"]))),
