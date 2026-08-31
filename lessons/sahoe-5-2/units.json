@@ -3,6 +3,7 @@
   "site": {
     "title": "역사 탐정 **수첩**",
     "subtitle": "사회 5학년 2학기",
+    "foot": "사회 5-2 · 역사 탐정 수첩",
     "nav_foot": "어느 차시든 눌러서 펼칠 수 있어요.\n예습도 복습도 자유롭게.",
     "teacher_page": true,
     "progress_key": "sahoe52-v1",
