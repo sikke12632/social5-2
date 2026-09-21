@@ -150,6 +150,56 @@
           "label": "20차시"
         }
       ]
+    },
+    {
+      "id": "u2",
+      "order": 2,
+      "label": "2",
+      "title": "달라지는 시대, 변화하는 생활 모습",
+      "lessons": [
+        {
+          "code": "01",
+          "kind": "lesson",
+          "slug": "u2-1",
+          "title": "단원 열기",
+          "label": "1차시"
+        },
+        {
+          "code": "02-03",
+          "kind": "lesson",
+          "slug": "u2-2-3",
+          "title": "조선의 건국과 두 번의 전쟁",
+          "label": "2~3차시"
+        },
+        {
+          "code": "04",
+          "kind": "lesson",
+          "slug": "u2-4",
+          "title": "유교가 바꾼 생활",
+          "label": "4차시"
+        },
+        {
+          "code": "05-06",
+          "kind": "lesson",
+          "slug": "u2-5-6",
+          "title": "조선의 신분",
+          "label": "5~6차시"
+        },
+        {
+          "code": "07",
+          "kind": "lesson",
+          "slug": "u2-7",
+          "title": "조선 전기 문화와 과학",
+          "label": "7차시"
+        },
+        {
+          "code": "01-07",
+          "kind": "review",
+          "slug": "u2-review1",
+          "title": "1~7차시 복습",
+          "label": "다시 풀기"
+        }
+      ]
     }
   ]
 }
