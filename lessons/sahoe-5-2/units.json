@@ -198,6 +198,48 @@
           "slug": "u2-review1",
           "title": "1~7차시 복습",
           "label": "다시 풀기"
+        },
+        {
+          "code": "08-09",
+          "kind": "lesson",
+          "slug": "u2-8-9",
+          "title": "달라지는 조선 후기",
+          "label": "8~9차시"
+        },
+        {
+          "code": "10",
+          "kind": "lesson",
+          "slug": "u2-10",
+          "title": "서민 문화",
+          "label": "10차시"
+        },
+        {
+          "code": "11-12",
+          "kind": "lesson",
+          "slug": "u2-11-12",
+          "title": "개항과 개혁",
+          "label": "11~12차시"
+        },
+        {
+          "code": "13",
+          "kind": "lesson",
+          "slug": "u2-13",
+          "title": "개항 이후의 생활",
+          "label": "13차시"
+        },
+        {
+          "code": "08-13",
+          "kind": "review",
+          "slug": "u2-review2",
+          "title": "8~13차시 복습",
+          "label": "다시 풀기"
+        },
+        {
+          "code": "14",
+          "kind": "lesson",
+          "slug": "u2-14",
+          "title": "단원 마무리",
+          "label": "14차시"
         }
       ]
     }
